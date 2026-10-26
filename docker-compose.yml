@@ -1,0 +1,11 @@
+services:
+  game-tka:
+    build: .
+    container_name: game-edukasi-tka
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    # Opsional: Jika Anda sedang mengedit kode dan ingin langsung melihat perubahan tanpa rebuild container:
+    # volumes:
+    #   - .:/usr/share/nginx/html:ro
+

@@ -1,0 +1,23 @@
+{
+  "name": "Petualangan Ceria TK-A",
+  "short_name": "Game TK-A",
+  "description": "Game Edukasi Interaktif Anak TK-A: Peta Indonesia, Rumah Adat & Suku, Membaca, dan Berhitung",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F0F9FF",
+  "theme_color": "#0284C7",
+  "icons": [
+    {
+      "src": "assets/islands/jawa.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/islands/jawa.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0284C7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Game Edukasi Interaktif Anak TK-A: Peta Indonesia, Rumah Adat & Suku, Membaca, dan Berhitung">
+  <link rel="manifest" href="manifest.json">
+  <title>Petualangan Ceria TK-A: Game Belajar, Tebak & Bermain</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Hiasan Awan Bergerak -->
+  <div class="bg-decorations">
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+  </div>
+
+  <!-- Kanvas Kembang Api / Confetti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <div id="app-container">
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <div class="brand-badge" title="Kembali ke Beranda">
+        <span class="brand-logo-icon">🎈</span>
+        <span class="brand-title">Petualangan TK-A</span>
+      </div>
+      <div class="top-actions">
+        <div class="star-counter" title="Total Bintang Kamu">
+          <span>⭐</span>
+          <span id="star-count">0</span>
+        </div>
+        <button id="btn-bgm" class="icon-btn" title="Nyalakan/Matikan Musik Ceria">🎵</button>
+        <button id="btn-mute" class="icon-btn" title="Nyalakan/Matikan Suara">🔊</button>
+        <button id="btn-stickers" class="icon-btn" title="Buka Album Stiker Kamu">🏆</button>
+      </div>
+    </header>
+
+    <!-- ==================================================== -->
+    <!-- SCREEN 1: HOME (MENU UTAMA KATEGORI)                 -->
+    <!-- ==================================================== -->
+    <main id="screen-home" class="screen active">
+      <section class="welcome-banner">
+        <div class="banner-content">
+          <h1>Halo Sahabat Cilik! 👋</h1>
+          <p>Ayo pilih permainan seru dan kumpulkan bintang emasmu!</p>
+          <div class="mascot-row">
+            <span>🗺️</span>
+            <span>🏠</span>
+            <span>📖</span>
+            <span>🔢</span>
+          </div>
+        </div>
+      </section>
+
+      <h2 class="menu-section-title">✨ Pilih Permainan Edukasi (30 Soal Seru Tiap Game)</h2>
+
+      <div class="category-grid">
+        <!-- 1. Peta Indonesia: Tebak Pulau Hilang & Ikon Landmark (30 Soal) -->
+        <div class="category-card card-peta" data-cat="peta">
+          <div class="cat-icon-bubble">🗺️</div>
+          <h3>Jelajah Pulau & Ikon Kota</h3>
+          <p>Tebak pulau dari foto landmark, ikon bersejarah & fauna khas Nusantara</p>
+          <span class="category-badge">30 Soal Menantang</span>
+        </div>
+
+        <!-- 2. Rumah Adat & Suku (Foto Asli - 30 Soal) -->
+        <div class="category-card card-foto" data-cat="foto">
+          <div class="cat-icon-bubble">🏠</div>
+          <h3>Rumah Adat & Suku</h3>
+          <p>Jodohkan foto asli rumah adat & busana suku Nusantara tanpa terpotong</p>
+          <span class="category-badge">30 Foto Asli Jelas</span>
+        </div>
+
+        <!-- 3. Melatih Membaca (30 Soal) -->
+        <div class="category-card card-baca" data-cat="baca">
+          <div class="cat-icon-bubble">📖</div>
+          <h3>Belajar Membaca</h3>
+          <p>Suku kata (K-V-K-V), melengkapi kata bergambar & pelafalan fonik bersuara</p>
+          <span class="category-badge">30 Soal Membaca</span>
+        </div>
+
+        <!-- 4. Melatih Berhitung (1 - 20) (30 Soal) -->
+        <div class="category-card card-hitung" data-cat="hitung">
+          <div class="cat-icon-bubble">🔢</div>
+          <h3>Belajar Berhitung</h3>
+          <p>Hitung sampai belasan (1-20), interaktif sentuh & penjumlahan visual ceria</p>
+          <span class="category-badge">30 Soal Berhitung</span>
+        </div>
+      </div>
+
+      <div class="home-footer-actions">
+        <button class="big-pill-btn" onclick="app.openStickersModal()">
+          <span>🏆</span> Album Stiker & Bintang
+        </button>
+        <button class="big-pill-btn" onclick="document.getElementById('modal-guide').classList.add('active')">
+          <span>ℹ️</span> Panduan Orang Tua & Guru
+        </button>
+      </div>
+    </main>
+
+    <!-- ==================================================== -->
+    <!-- SCREEN 2: PETA INDONESIA & TEBAK IKON PULAU (30 SOAL)-->
+    <!-- ==================================================== -->
+    <section id="screen-peta" class="screen">
+      <div class="game-header">
+        <button class="game-back-btn btn-back-home">
+          <span>⬅️</span> Menu
+        </button>
+        <div class="game-progress-wrapper">
+          <div class="progress-track">
+            <div id="peta-progress-fill" class="progress-fill"></div>
+          </div>
+          <span id="peta-progress-text" class="progress-text">1 / 30</span>
+        </div>
+        <button id="peta-voice-btn" class="voice-play-btn" title="Ulangi Suara Pertanyaan">
+          <span>🔊</span> Suara
+        </button>
+      </div>
+
+      <div class="indonesia-map-board">
+        <h2 style="font-size: 1.4rem; color: #0284C7; margin-bottom: 4px;">🗺️ Jelajah Ikon Kota & Pulau Indonesia</h2>
+        <div id="peta-prompt" class="question-prompt" style="font-size: 1.35rem; color: #1E293B; margin-bottom: 12px;">
+          Di pulau manakah ikon terkenal ini berada?
+        </div>
+
+        <!-- Wadah Foto Ikon Landmark & Penjelasannya -->
+        <div class="landmark-showcase-box">
+          <div class="landmark-photo-frame">
+            <div id="landmark-badge" class="landmark-cat-badge">Ikon Terkenal</div>
+            <img id="landmark-photo-img" src="" alt="Ikon Landmark" class="landmark-photo-img">
+          </div>
+          <div class="landmark-info-col">
+            <h3 id="landmark-title" class="landmark-title-text">Nama Ikon</h3>
+            <p id="landmark-clue" class="landmark-clue-text">Petunjuk menarik mengenai ikon pulau.</p>
+          </div>
+        </div>
+
+        <!-- Wadah Gambar Peta Asli dari Pengguna -->
+        <div id="peta-map-wrapper" class="map-real-container">
+          <img id="peta-main-img" class="map-real-img" src="assets/peta-indonesia.png" alt="Peta Indonesia Asli">
+          <div id="peta-pin-indicator" class="island-pin-marker" style="display: none;"></div>
+        </div>
+
+        <p style="font-size: 1.15rem; color: #475569; font-weight: 700; margin: 14px 0 6px 0;">
+          👇 Sentuh kartu gambar pulau tempat ikon ini berada:
+        </p>
+
+        <!-- Pilihan Jawaban KARTU GAMBAR PULAU ASLI -->
+        <div id="peta-options-container" class="island-card-options-grid">
+          <!-- Rendered Image Cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SCREEN 3: RUMAH ADAT & SUKU NUSANTARA (FOTO ASLI)    -->
+    <!-- ==================================================== -->
+    <section id="screen-foto" class="screen">
+      <div class="game-header">
+        <button class="game-back-btn btn-back-home">
+          <span>⬅️</span> Menu
+        </button>
+        <div class="game-progress-wrapper">
+          <div class="progress-track">
+            <div id="foto-progress-fill" class="progress-fill"></div>
+          </div>
+          <span id="foto-progress-text" class="progress-text">1 / 30</span>
+        </div>
+        <button id="foto-voice-btn" class="voice-play-btn">
+          <span>🔊</span> Suara
+        </button>
+      </div>
+
+      <div class="photo-match-board">
+        <div id="foto-prompt" class="question-prompt" style="font-size: 1.4rem; color: #C2410C; margin-bottom: 12px;">
+          Jodohkan Foto Asli Rumah & Sukunya!
+        </div>
+
+        <!-- Bingkai Foto Asli Rumah Adat (Utuh & Tidak Terpotong) -->
+        <div class="photo-main-frame">
+          <div class="photo-tag-badge">📷 FOTO ASLI RUMAH ADAT</div>
+          <img id="foto-main-img" class="photo-main-img" src="" alt="Rumah Adat">
+        </div>
+
+        <div style="text-align: center; margin-bottom: 14px;">
+          <h3 id="foto-main-title" style="font-size: 1.5rem; color: #1E293B; margin-bottom: 4px;">Nama Rumah Adat</h3>
+          <span id="foto-main-region" class="clue-pill" style="margin-bottom: 8px;">📍 Asal Daerah</span>
+          <p id="foto-main-desc" style="font-size: 1rem; color: #475569; max-width: 650px; margin: 8px auto 0 auto; line-height: 1.5; font-weight: 500;">
+            Deskripsi rumah adat.
+          </p>
+        </div>
+
+        <p style="font-size: 1.15rem; color: #9A3412; font-weight: 700; text-align: center; margin-top: 14px;">
+          👇 Manakah foto asli busana adat suku pemilik rumah ini? (Tampil Utuh & Jelas)
+        </p>
+
+        <!-- Pilihan Foto Asli Pakaian Adat Suku -->
+        <div id="foto-choices-container" class="photo-choices-grid">
+          <!-- Rendered Photo Cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SCREEN 4: GAME MELATIH MEMBACA (SUKU KATA)           -->
+    <!-- ==================================================== -->
+    <section id="screen-baca" class="screen">
+      <div class="game-header">
+        <button class="game-back-btn btn-back-home">
+          <span>⬅️</span> Menu
+        </button>
+        <div class="game-progress-wrapper">
+          <div class="progress-track">
+            <div id="baca-progress-fill" class="progress-fill"></div>
+          </div>
+          <span id="baca-progress-text" class="progress-text">1 / 30</span>
+        </div>
+        <button id="baca-voice-btn" class="voice-play-btn">
+          <span>🔊</span> Suara
+        </button>
+      </div>
+
+      <div class="reading-playground">
+        <div id="baca-prompt" class="question-prompt" style="color: #9D174D; margin-bottom: 8px;">
+          Ayo Lengkapi Kata Bergambar!
+        </div>
+
+        <div id="baca-emoji" class="reading-emoji-bubble">⚽</div>
+
+        <!-- Kotak Suku Kata Display (BO - LA) -->
+        <div id="baca-syllables-box" class="syllables-container">
+          <!-- Rendered Syllable Boxes -->
+        </div>
+
+        <p style="font-size: 1.15rem; color: #475569; font-weight: 700; margin-bottom: 12px;">
+          Pilih suku kata yang tepat:
+        </p>
+
+        <div id="baca-options-container" class="syllable-options-row">
+          <!-- Syllable Buttons -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SCREEN 5: BELAJAR BERHITUNG HINGGA BELASAN (1 - 20)  -->
+    <!-- ==================================================== -->
+    <section id="screen-hitung" class="screen">
+      <div class="game-header">
+        <button class="game-back-btn btn-back-home">
+          <span>⬅️</span> Menu
+        </button>
+        <div class="game-progress-wrapper">
+          <div class="progress-track">
+            <div id="hitung-progress-fill" class="progress-fill"></div>
+          </div>
+          <span id="hitung-progress-text" class="progress-text">1 / 30</span>
+        </div>
+        <button id="counting-voice-btn" class="voice-play-btn">
+          <span>🔊</span> Suara
+        </button>
+      </div>
+
+      <div class="counting-playground">
+        <!-- Hero Box Subjek Utama (Mobil, Sepeda, Hewan, dll) -->
+        <div id="hitung-hero-box" class="counting-hero-box" style="display: none;">
+          <div id="hitung-hero-icon" class="counting-hero-icon">🚗</div>
+          <div class="counting-hero-info">
+            <div id="hitung-hero-title" class="counting-hero-title">Mobil Balap</div>
+            <div id="hitung-hero-desc" class="counting-hero-desc">Yuk kita hitung bagian-bagiannya!</div>
+          </div>
+        </div>
+
+        <div id="hitung-prompt" class="question-prompt" style="color: #15803D;">
+          Berapa banyak buah ini?
+        </div>
+        
+        <p style="font-size: 1.05rem; color: #166534; font-weight: 600; margin-bottom: 6px;">
+          👉 Sentuh gambar untuk memberi nomor dan menghitung dengan teliti!
+        </p>
+
+        <!-- Area Objek Interaktif -->
+        <div id="counting-items-area" class="interactive-items-area">
+          <!-- Rendered Items -->
+        </div>
+
+        <p style="font-size: 1.2rem; color: #475569; font-weight: 700; margin-top: 14px;">
+          Pilih angka yang tepat:
+        </p>
+        <div id="counting-options" class="number-selector-row">
+          <!-- Number Buttons -->
+        </div>
+
+        <!-- Papan Angka 1-20 untuk Eksplorasi Mandiri -->
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 2px dashed #86EFAC;">
+          <p style="font-size: 1rem; color: #166534; font-weight: 700; margin-bottom: 8px;">
+            🔢 Papan Pengenalan Angka 1 sampai 20 (Sentuh untuk Mendengar Suara):
+          </p>
+          <div class="number-chart-20">
+            <button class="chart-number-tile" onclick="soundEngine.playCount(1); soundEngine.speakNumber(1)">1</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(2); soundEngine.speakNumber(2)">2</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(3); soundEngine.speakNumber(3)">3</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(4); soundEngine.speakNumber(4)">4</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(5); soundEngine.speakNumber(5)">5</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(6); soundEngine.speakNumber(6)">6</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(7); soundEngine.speakNumber(7)">7</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(8); soundEngine.speakNumber(8)">8</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(9); soundEngine.speakNumber(9)">9</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(10); soundEngine.speakNumber(10)">10</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(11); soundEngine.speakNumber(11)">11</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(12); soundEngine.speakNumber(12)">12</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(13); soundEngine.speakNumber(13)">13</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(14); soundEngine.speakNumber(14)">14</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(15); soundEngine.speakNumber(15)">15</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(16); soundEngine.speakNumber(16)">16</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(17); soundEngine.speakNumber(17)">17</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(18); soundEngine.speakNumber(18)">18</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(19); soundEngine.speakNumber(19)">19</button>
+            <button class="chart-number-tile" onclick="soundEngine.playCount(20); soundEngine.speakNumber(20)">20</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ==================================================== -->
+  <!-- MODAL: CELEBRATION (JUARA 3 BINTANG)                 -->
+  <!-- ==================================================== -->
+  <div id="modal-celebrate" class="modal-overlay">
+    <div class="modal-card">
+      <div class="celebrate-stars">⭐⭐⭐</div>
+      <h2>HORE! HEBAT SEKALI! 🎉</h2>
+      <p id="celebrate-text">Kamu pintar sekali! Berhasil menyelesaikan semua 30 pertanyaan dengan sangat baik dan mendapatkan 3 Bintang Emas!</p>
+      
+      <div class="modal-actions">
+        <button id="btn-celebrate-replay" class="btn-primary">🔄 Main Lagi</button>
+        <button id="btn-celebrate-home" class="btn-secondary">🏠 Menu Utama</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================================================== -->
+  <!-- MODAL: STICKER ALBUM                                 -->
+  <!-- ==================================================== -->
+  <div id="modal-stickers" class="modal-overlay">
+    <div class="modal-card" style="max-width: 540px;">
+      <h2 style="color: #B45309;">🏆 Album Stiker Juara</h2>
+      <p>Kumpulkan bintang untuk membuka semua stiker lucu!</p>
+      
+      <div id="sticker-album-grid" class="sticker-grid">
+        <!-- Rendered Sticker Slots -->
+      </div>
+
+      <div class="modal-actions" style="margin-top: 18px;">
+        <button class="btn-primary btn-close-modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================================================== -->
+  <!-- MODAL: PANDUAN ORANG TUA & GURU                      -->
+  <!-- ==================================================== -->
+  <div id="modal-guide" class="modal-overlay">
+    <div class="modal-card" style="text-align: left; max-width: 560px;">
+      <h2 style="text-align: center; color: #0284C7; margin-bottom: 12px;">ℹ️ Panduan Orang Tua & Guru</h2>
+      <div style="font-size: 1rem; line-height: 1.6; color: #334155;">
+        <p><strong>🎯 Pembaruan Kurikulum TK-A (4 Game Inti @ 30 Soal = 120 Soal):</strong></p>
+        <ul style="margin: 8px 0 12px 18px;">
+          <li><strong>Peta Indonesia Interaktif (30 Soal):</strong> Peta asli kepulauan Nusantara. Menjawab pulau asal dari 30 landmark, fauna, dan ikon kota terkenal.</li>
+          <li><strong>Foto Asli Rumah Adat & Suku (30 Soal):</strong> Dokumentasi foto asli Nusantara ditampilkan utuh tanpa terpotong (pakaian dan mahkota kepala jelas).</li>
+          <li><strong>Literasi Awal / Membaca (30 Soal):</strong> Pengenalan 30 kata suku kata (K-V-K-V) dengan visual ceria dan pelafalan fonik bersuara.</li>
+          <li><strong>Numerasi Awal / Berhitung (30 Soal):</strong> Menghitung hingga belasan (1-20) secara interaktif sentuh serta penjumlahan visual ceria.</li>
+        </ul>
+        <p><strong>💡 Suara Audio:</strong> Anak dapat menekan tombol 🔊 kapan saja untuk mendengar kembali instruksi dan ejaan kata.</p>
+      </div>
+      <div class="modal-actions" style="margin-top: 18px;">
+        <button class="btn-primary btn-close-modal" style="margin: 0 auto;">Mengerti & Main</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

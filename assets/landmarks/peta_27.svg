@@ -1,0 +1,8 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <rect width="400" height="300" rx="16" fill="#166534"/>
+  <circle cx="220" cy="150" r="75" fill="#64748B"/>
+  <circle cx="130" cy="150" r="50" fill="#475569"/>
+  <path d="M 110 160 Q 90 220 120 225 Q 130 225 125 200" stroke="#475569" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <circle cx="135" cy="140" r="6" fill="#0F172A"/>
+  <text x="200" y="275" font-family="'Quicksand', sans-serif" font-size="18" font-weight="bold" fill="#FEF08A" text-anchor="middle">ðŸ˜ Gajah Sumatera Way Kambas (Sumatera)</text>
+</svg>

@@ -1,0 +1,71 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sukuBgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F1F5F9"/>
+      <stop offset="60%" stop-color="#E2E8F0"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <filter id="charShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0F172A" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <!-- Background Card -->
+  <rect width="300" height="400" rx="18" fill="url(#sukuBgGrad)"/>
+  <circle cx="150" cy="180" r="110" fill="#FFFFFF" opacity="0.6"/>
+
+  <!-- Karakter Busana Adat Lengkap (Dari Mahkota sampai Sepatu) -->
+  <g filter="url(#charShadow)">
+    <!-- Kaki & Sandal Tradisional -->
+    <rect x="130" y="335" width="16" height="30" rx="4" fill="#E29578"/>
+    <rect x="154" y="335" width="16" height="30" rx="4" fill="#E29578"/>
+    <ellipse cx="138" cy="368" rx="14" ry="7" fill="#451A03"/>
+    <ellipse cx="162" cy="368" rx="14" ry="7" fill="#451A03"/>
+
+    <!-- Kain Sarong / Bawahan Tradisional (Kain Tenun / Batik) -->
+    <path d="M 115 240 L 185 240 L 195 340 L 105 340 Z" fill="#991B1B"/>
+    <line x1="108" y1="265" x2="192" y2="265" stroke="#FEF08A" stroke-width="2" stroke-dasharray="4,3"/>
+    <line x1="106" y1="295" x2="194" y2="295" stroke="#FEF08A" stroke-width="2" stroke-dasharray="4,3"/>
+    <line x1="105" y1="325" x2="195" y2="325" stroke="#FEF08A" stroke-width="2" stroke-dasharray="4,3"/>
+
+    <!-- Badan & Baju Atasan Adat -->
+    <path d="M 105 155 Q 150 145 195 155 L 188 245 L 112 245 Z" fill="#FFFFFF"/>
+    
+    <!-- Lengan & Tangan Menghormati -->
+    <path d="M 105 155 L 82 225 L 102 235 L 118 180 Z" fill="#FFFFFF"/>
+    <circle cx="92" cy="235" r="9" fill="#E29578"/>
+    <path d="M 195 155 L 218 225 L 198 235 L 182 180 Z" fill="#FFFFFF"/>
+    <circle cx="208" cy="235" r="9" fill="#E29578"/>
+
+    <!-- Sabuk / Pending Emas -->
+    <rect x="110" y="235" width="80" height="12" rx="3" fill="#F59E0B" stroke="#B45309" stroke-width="1"/>
+    <circle cx="150" cy="241" r="9" fill="#FDE047" stroke="#B45309" stroke-width="2"/>
+
+    <!-- Leher & Kalung Tradisional -->
+    <rect x="140" y="132" width="20" height="24" rx="4" fill="#E29578"/>
+    <path d="M 132 154 Q 150 172 168 154" fill="none" stroke="#FBBF24" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Wajah Ceria Ramah Anak -->
+    <ellipse cx="150" cy="115" rx="30" ry="34" fill="#E29578"/>
+    <circle cx="140" cy="112" r="4" fill="#1E293B"/>
+    <circle cx="160" cy="112" r="4" fill="#1E293B"/>
+    <ellipse cx="132" cy="120" rx="4" ry="2" fill="#F43F5E" opacity="0.6"/>
+    <ellipse cx="168" cy="120" rx="4" ry="2" fill="#F43F5E" opacity="0.6"/>
+    <path d="M 143 125 Q 150 134 157 125" fill="none" stroke="#991B1B" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Rambut Rapi -->
+    <path d="M 120 110 Q 150 78 180 110 Q 150 90 120 110 Z" fill="#1E293B"/>
+
+    <!-- Mahkota Kepala / Penutup Kepala Adat Megah (Tampil Utuh) -->
+    <path d="M 115 90 Q 150 35 185 90 Q 150 65 115 90 Z" fill="#FDE047" stroke="#B45309" stroke-width="2"/><circle cx="150" cy="45" r="7" fill="#DC2626"/>
+
+    <!-- Aksesoris Tambahan (Selendang / Keris / Bros) -->
+    <rect x="110" y="235" width="80" height="15" fill="#FBBF24"/><circle cx="150" cy="242" r="10" fill="#DC2626"/>
+  </g>
+
+  <!-- Badge Nama Busana & Suku -->
+  <g transform="translate(15, 12)">
+    <rect width="210" height="42" rx="12" fill="#0F172A" opacity="0.88"/>
+    <text x="12" y="22" font-family="'Quicksand', sans-serif" font-size="13" font-weight="bold" fill="#FEF08A">Busana Adat Lampung</text>
+    <text x="12" y="36" font-family="'Quicksand', sans-serif" font-size="11" font-weight="600" fill="#E2E8F0">ðŸ“ Lampung</text>
+  </g>
+</svg>

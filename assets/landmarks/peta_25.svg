@@ -1,0 +1,8 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <rect width="400" height="300" rx="16" fill="#0284C7"/>
+  <circle cx="100" cy="160" r="35" fill="#15803D"/>
+  <circle cx="200" cy="140" r="50" fill="#166534"/>
+  <circle cx="300" cy="160" r="40" fill="#15803D"/>
+  <path d="M 0 200 Q 200 180 400 200 L 400 300 L 0 300 Z" fill="#06B6D4" opacity="0.8"/>
+  <text x="200" y="275" font-family="'Quicksand', sans-serif" font-size="18" font-weight="bold" fill="#FEF08A" text-anchor="middle">ðŸï¸ Raja Ampat Wayag (Papua)</text>
+</svg>

@@ -1,0 +1,8 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <rect width="400" height="300" rx="16" fill="#92400E"/>
+  <path d="M 130 90 Q 200 20 270 90" stroke="#FEF08A" stroke-width="8" fill="none"/>
+  <rect x="130" y="90" width="140" height="130" rx="16" fill="#B45309" stroke="#FEF08A" stroke-width="4"/>
+  <line x1="130" y1="130" x2="270" y2="130" stroke="#FDE047" stroke-width="4" stroke-dasharray="8,6"/>
+  <line x1="130" y1="170" x2="270" y2="170" stroke="#FDE047" stroke-width="4" stroke-dasharray="8,6"/>
+  <text x="200" y="275" font-family="'Quicksand', sans-serif" font-size="18" font-weight="bold" fill="#FEF08A" text-anchor="middle">ðŸ‘œ Tas Anyaman Noken (Pulau Papua)</text>
+</svg>

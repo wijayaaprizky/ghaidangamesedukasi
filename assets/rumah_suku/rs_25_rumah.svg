@@ -1,0 +1,54 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="60%" stop-color="#E0F2FE"/>
+      <stop offset="100%" stop-color="#FEF08A"/>
+    </linearGradient>
+    <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#86EFAC"/>
+      <stop offset="100%" stop-color="#22C55E"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <!-- Background Alam -->
+  <rect width="400" height="300" rx="16" fill="url(#skyGrad)"/>
+  <circle cx="340" cy="55" r="30" fill="#FDE047" opacity="0.8"/>
+  <path d="M 0 215 Q 100 205, 200 215 T 400 215 L 400 300 L 0 300 Z" fill="url(#groundGrad)"/>
+  
+  <!-- Bangunan Rumah Adat -->
+  <g filter="url(#cardShadow)">
+    <!-- Tiang Panggung / Pondasi Kayu -->
+    <rect x="75" y="165" width="250" height="45" rx="6" fill="#78350F" opacity="0.9"/>
+    <line x1="90" y1="210" x2="90" y2="245" stroke="#451A03" stroke-width="8" stroke-linecap="round"/>
+    <line x1="160" y1="210" x2="160" y2="245" stroke="#451A03" stroke-width="8" stroke-linecap="round"/>
+    <line x1="240" y1="210" x2="240" y2="245" stroke="#451A03" stroke-width="8" stroke-linecap="round"/>
+    <line x1="310" y1="210" x2="310" y2="245" stroke="#451A03" stroke-width="8" stroke-linecap="round"/>
+    <!-- Tangga Naik -->
+    <path d="M 185 245 L 215 245 L 210 200 L 190 200 Z" fill="#92400E"/>
+    <line x1="187" y1="212" x2="213" y2="212" stroke="#FEF08A" stroke-width="2"/>
+    <line x1="186" y1="225" x2="214" y2="225" stroke="#FEF08A" stroke-width="2"/>
+    <line x1="185" y1="237" x2="215" y2="237" stroke="#FEF08A" stroke-width="2"/>
+
+    <!-- Dinding Utama -->
+    <rect x="90" y="115" width="220" height="75" rx="4" fill="#78350F"/>
+    <rect x="110" y="130" width="30" height="35" rx="3" fill="#38BDF8" stroke="#1E293B" stroke-width="2"/>
+    <rect x="260" y="130" width="30" height="35" rx="3" fill="#38BDF8" stroke="#1E293B" stroke-width="2"/>
+    <rect x="185" y="130" width="30" height="55" rx="3" fill="#78350F" stroke="#FEF08A" stroke-width="2"/>
+
+    <!-- Bentuk Atap Khas -->
+    <polygon points="200,65 75,135 325,135" fill="#0369A1"/>
+
+    <!-- Ornamen / Detail Tambahan -->
+    <path d="M 50 250 Q 200 240 350 250 L 350 270 Q 200 260 50 270 Z" fill="#38BDF8"/>
+  </g>
+
+  <!-- Pita Header Nama Rumah & Asal -->
+  <g transform="translate(10, 10)">
+    <rect width="210" height="42" rx="12" fill="#0F172A" opacity="0.88"/>
+    <text x="12" y="22" font-family="'Quicksand', sans-serif" font-size="14" font-weight="bold" fill="#FEF08A">Rumah Rakit</text>
+    <text x="12" y="36" font-family="'Quicksand', sans-serif" font-size="11" font-weight="600" fill="#E2E8F0">ðŸ“ Bangka Belitung</text>
+  </g>
+</svg>

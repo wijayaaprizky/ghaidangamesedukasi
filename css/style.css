@@ -506,6 +506,12 @@ body {
   .landmark-showcase-box {
     flex-direction: column;
     text-align: center;
+    align-items: center;
+  }
+  .landmark-photo-frame {
+    width: 220px;
+    height: 155px;
+    max-width: 100%;
   }
 }
 

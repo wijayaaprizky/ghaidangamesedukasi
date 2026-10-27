@@ -15,7 +15,20 @@ class SoundEngine {
       "Sebelas", "Dua belas", "Tiga belas", "Empat belas", "Lima belas", "Enam belas",
       "Tujuh belas", "Delapan belas", "Sembilan belas", "Dua puluh"
     ];
+    this.currentUtterance = null;
     this.initVoice();
+    this.unlockAudioOnFirstGesture();
+  }
+
+  unlockAudioOnFirstGesture() {
+    const unlock = () => {
+      this.initAudioContext();
+      if ('speechSynthesis' in window) {
+        this.findBestIndonesianVoice();
+      }
+    };
+    document.addEventListener('click', unlock, { once: true });
+    document.addEventListener('touchstart', unlock, { once: true });
   }
 
   initAudioContext() {
@@ -33,11 +46,7 @@ class SoundEngine {
   initVoice() {
     if (!('speechSynthesis' in window)) return;
     const loadVoices = () => {
-      const voices = window.speechSynthesis.getVoices();
-      // Prioritize Indonesian voice
-      this.voice = voices.find(v => v.lang.includes('id') || v.lang.includes('ID')) ||
-                   voices.find(v => v.lang.includes('ms') || v.lang.includes('MY')) ||
-                   voices[0];
+      this.findBestIndonesianVoice();
     };
     loadVoices();
     if (window.speechSynthesis.onvoiceschanged !== undefined) {
@@ -45,18 +54,90 @@ class SoundEngine {
     }
   }
 
+  // Pencarian Pintar Suara Bahasa Indonesia Alami
+  findBestIndonesianVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices || voices.length === 0) return this.voice;
+
+    // 1. Filter semua voice dengan tag Bahasa Indonesia (id, id-ID, in, in-ID)
+    const idVoices = voices.filter(v => {
+      const lang = (v.lang || '').toLowerCase().replace('_', '-');
+      const name = (v.name || '').toLowerCase();
+      return lang === 'id' || lang.startsWith('id-') || lang === 'in' || lang.startsWith('in-') || name.includes('indonesia');
+    });
+
+    if (idVoices.length > 0) {
+      // Prioritaskan suara natural / wanita ramah anak:
+      // Google Bahasa Indonesia (Android/Chrome), Microsoft Gadis / Ardi Natural (Windows/Edge), Apple Damayanti (iOS/Safari)
+      const naturalVoice = idVoices.find(v => 
+        /natural|online|google|gadis|damayanti/i.test(v.name)
+      );
+      this.voice = naturalVoice || idVoices[0];
+      return this.voice;
+    }
+
+    // 2. Alternatif regional: Suara Melayu (ms, ms-MY) jika perangkat tidak memiliki paket suara Indonesia
+    // (Pelafalan fonem Melayu sangat mirip dan natural didengar anak Indonesia, berbeda jauh dengan aksen Inggris)
+    const msVoice = voices.find(v => {
+      const lang = (v.lang || '').toLowerCase().replace('_', '-');
+      const name = (v.name || '').toLowerCase();
+      return lang.startsWith('ms') || name.includes('malay');
+    });
+
+    if (msVoice) {
+      this.voice = msVoice;
+      return this.voice;
+    }
+
+    // 3. PENTING: JANGAN PERNAH fallback ke voices[0] (yang biasanya English / US)!
+    // Membiarkan this.voice = null akan membuat peramban (Chrome Android/iOS Safari)
+    // memproses utter.lang = 'id-ID' secara tepat menggunakan mesin sintesis bahasa Indonesia,
+    // bukan dipaksa membaca dengan logat bule / robotik asing!
+    this.voice = null;
+    return null;
+  }
+
   speak(text, onEnd) {
     if (this.isMuted || !('speechSynthesis' in window)) return;
+    
+    // Resume audio context jika browser menidurkannya
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
     window.speechSynthesis.cancel(); // Hentikan suara yang sedang berjalan
 
+    const bestVoice = this.findBestIndonesianVoice();
+
     const utter = new SpeechSynthesisUtterance(text);
-    if (this.voice) utter.voice = this.voice;
+    if (bestVoice) {
+      utter.voice = bestVoice;
+    }
     utter.lang = 'id-ID';
-    utter.rate = 0.88; // Agak perlahan agar artikulasi jelas bagi anak TK
-    utter.pitch = 1.15; // Ceria dan ramah
-    if (onEnd) utter.onend = onEnd;
+    utter.rate = 0.90; // Kecepatan artikulasi ramah, jelas & tegas untuk anak TK
+    utter.pitch = 1.0;  // Pitch natural 1.0 (mencegah suara robot/cempreng terdistorsi di HP)
+
+    // Cegah garbage collection prematur di Google Chrome Android
+    this.currentUtterance = utter;
+
+    utter.onend = (e) => {
+      this.currentUtterance = null;
+      if (onEnd) onEnd(e);
+    };
+
+    utter.onerror = (e) => {
+      this.currentUtterance = null;
+      if (onEnd) onEnd(e);
+    };
     
-    window.speechSynthesis.speak(utter);
+    // Jeda mikro 40ms untuk stabilitas pembatalan di mobile Safari & Chrome
+    setTimeout(() => {
+      try {
+        window.speechSynthesis.speak(utter);
+      } catch (err) {
+        console.warn("Speak error:", err);
+      }
+    }, 40);
   }
 
   // Khusus membaca suku kata & mengeja

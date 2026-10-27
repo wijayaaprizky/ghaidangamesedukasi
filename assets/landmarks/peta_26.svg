@@ -1,8 +1,0 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
-  <rect width="400" height="300" rx="16" fill="#15803D"/>
-  <ellipse cx="200" cy="160" rx="85" ry="60" fill="#64748B"/>
-  <circle cx="120" cy="140" r="45" fill="#475569"/>
-  <polygon points="80,125 100,100 95,130" fill="#E2E8F0"/>
-  <circle cx="115" cy="130" r="6" fill="#0F172A"/>
-  <text x="200" y="275" font-family="'Quicksand', sans-serif" font-size="18" font-weight="bold" fill="#FEF08A" text-anchor="middle">ðŸ¦ Badak Bercula Satu Ujung Kulon (Jawa)</text>
-</svg>

@@ -1,8 +1,0 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
-  <rect width="400" height="300" rx="16" fill="#0369A1"/>
-  <circle cx="120" cy="200" r="45" fill="#F43F5E"/>
-  <circle cx="200" cy="220" r="55" fill="#F59E0B"/>
-  <circle cx="280" cy="200" r="45" fill="#10B981"/>
-  <text x="140" y="110" font-size="40">ðŸ </text><text x="250" y="140" font-size="36">ðŸ¡</text>
-  <text x="200" y="275" font-family="'Quicksand', sans-serif" font-size="18" font-weight="bold" fill="#FEF08A" text-anchor="middle">ðŸª¸ Karang Laut Wakatobi (Sulawesi)</text>
-</svg>

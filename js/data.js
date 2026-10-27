@@ -441,8 +441,8 @@ const GAME_DATA = {
   ],
 
   // ==========================================
-  // 2. RUMAH ADAT & SUKU NUSANTARA (30 SOAL LOKAL INSTAN)
-  // Semua gambar tersimpan lokal di assets/rumah_suku/ (0 ms loading, utuh, tanpa terpotong)
+  // 2. RUMAH ADAT & SUKU NUSANTARA (16 FOTO ASLI NYATA LOKAL)
+  // 100% Foto Asli Asli Nyata, Tanpa Kartun, Tanpa Buffer
   // ==========================================
   rumahSukuAsli: [
     {
@@ -510,19 +510,19 @@ const GAME_DATA = {
       namaRumah: "Rumah Bolon Batak",
       namaSuku: "Suku Batak",
       asalDaerah: "Sumatera Utara",
-      fotoRumah: "assets/rumah_suku/rs_7_rumah.svg",
+      fotoRumah: "assets/rumah_suku/rs_7_rumah.jpg",
       fotoSuku: "assets/rumah_suku/rs_7_suku.jpg",
       deskripsi: "Rumah Bolon memiliki atap melengkung tinggi dari kayu kokoh tanpa paku. Suku Batak mengenakan kain tenun Ulos berwibawa.",
-      soundQuestion: "Lihat foto asli Rumah Bolon Batak. Manakah foto asli pakaian adat suku Batak dengan kain Ulos?"
+      soundQuestion: "Lihat foto asli Rumah Bolon Batak. Manakah foto asli pakaian adat suku Batak dengan kain tenun Ulos?"
     },
     {
       id: "rs_8",
       namaRumah: "Rumoh Aceh (Krong Bade)",
       namaSuku: "Suku Aceh",
       asalDaerah: "Serambi Mekkah, Aceh",
-      fotoRumah: "assets/rumah_suku/rs_8_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_8_suku.svg",
-      deskripsi: "Rumoh Aceh berbentuk rumah panggung dengan ukiran khas kayu berornamen islami yang anggun.",
+      fotoRumah: "assets/rumah_suku/rs_8_rumah.jpg",
+      fotoSuku: "assets/rumah_suku/rs_8_suku.jpg",
+      deskripsi: "Rumoh Aceh berbentuk rumah panggung dengan ukiran khas kayu berornamen islami yang sangat anggun dan kokoh.",
       soundQuestion: "Lihat foto asli Rumoh Aceh. Manakah foto asli pakaian adat suku Aceh yang berwibawa?"
     },
     {
@@ -530,19 +530,19 @@ const GAME_DATA = {
       namaRumah: "Rumah Kebaya Betawi",
       namaSuku: "Suku Betawi",
       asalDaerah: "DKI Jakarta",
-      fotoRumah: "assets/rumah_suku/rs_9_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_9_suku.svg",
+      fotoRumah: "assets/rumah_suku/rs_9_rumah.jpg",
+      fotoSuku: "assets/rumah_suku/rs_9_suku.jpg",
       deskripsi: "Rumah Kebaya memiliki teras depan luas dengan hiasan renda kayu di pinggir atap mirip lipatan kain kebaya.",
-      soundQuestion: "Lihat foto asli Rumah Kebaya Betawi. Manakah foto asli pakaian adat suku Betawi dengan selendang cukin?"
+      soundQuestion: "Lihat foto asli Rumah Kebaya Betawi. Manakah foto asli pakaian adat suku Betawi None Jakarta?"
     },
     {
       id: "rs_10",
-      namaRumah: "Rumah Kasepuhan Sunda",
+      namaRumah: "Rumah Adat Sunda (Kampung Naga)",
       namaSuku: "Suku Sunda",
       asalDaerah: "Jawa Barat & Banten",
-      fotoRumah: "assets/rumah_suku/rs_10_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_10_suku.svg",
-      deskripsi: "Rumah adat Jawa Barat yang anggun berarsitektur kayu jati dengan keramahan khas masyarakat tanah Pasundan.",
+      fotoRumah: "assets/rumah_suku/rs_10_rumah.jpg",
+      fotoSuku: "assets/rumah_suku/rs_10_suku.jpg",
+      deskripsi: "Rumah adat Jawa Barat yang anggun berarsitektur bambu dan kayu selaras alam dengan keramahan khas masyarakat tanah Pasundan.",
       soundQuestion: "Lihat foto asli rumah adat di Jawa Barat. Manakah foto asli busana adat anggun suku Sunda?"
     },
     {
@@ -550,19 +550,19 @@ const GAME_DATA = {
       namaRumah: "Rumah Saoraja Bugis",
       namaSuku: "Suku Bugis",
       asalDaerah: "Sulawesi Selatan",
-      fotoRumah: "assets/rumah_suku/rs_11_rumah.svg",
+      fotoRumah: "assets/rumah_suku/rs_11_rumah.jpg",
       fotoSuku: "assets/rumah_suku/rs_11_suku.jpg",
       deskripsi: "Rumah panggung megah kayu ulin para bangsawan suku Bugis yang dikenal sebagai pelaut tangguh Nusantara.",
-      soundQuestion: "Lihat foto rumah adat Saoraja. Manakah foto asli busana adat suku Bugis dengan Baju Bodo?"
+      soundQuestion: "Lihat foto asli rumah adat Saoraja. Manakah foto asli busana adat suku Bugis dengan Baju Bodo?"
     },
     {
       id: "rs_12",
       namaRumah: "Rumah Bale Tani Sasak",
       namaSuku: "Suku Sasak",
       asalDaerah: "Lombok, NTB",
-      fotoRumah: "assets/rumah_suku/rs_12_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_12_suku.svg",
-      deskripsi: "Rumah adat suku Sasak di desa Sade berdinding anyaman bambu dan beratap alang-alang yang sejuk.",
+      fotoRumah: "assets/rumah_suku/rs_12_rumah.jpg",
+      fotoSuku: "assets/rumah_suku/rs_12_suku.jpg",
+      deskripsi: "Rumah adat suku Sasak di desa Sade berdinding anyaman bambu dan beratap alang-alang yang sangat sejuk.",
       soundQuestion: "Lihat foto asli rumah adat suku Sasak di Lombok. Manakah foto asli busana adat masyarakat suku Sasak?"
     },
     {
@@ -570,7 +570,7 @@ const GAME_DATA = {
       namaRumah: "Rumah Bubungan Tinggi",
       namaSuku: "Suku Banjar",
       asalDaerah: "Kalimantan Selatan",
-      fotoRumah: "assets/rumah_suku/rs_13_rumah.svg",
+      fotoRumah: "assets/rumah_suku/rs_13_rumah.jpg",
       fotoSuku: "assets/rumah_suku/rs_13_suku.jpg",
       deskripsi: "Rumah panggung megah beratap curam menjulang tinggi khas suku Banjar di pesisir sungai Kalimantan Selatan.",
       soundQuestion: "Lihat foto asli Rumah Bubungan Tinggi. Manakah foto busana adat suku Banjar yang bermahkotakan melati?"
@@ -580,170 +580,30 @@ const GAME_DATA = {
       namaRumah: "Rumah Mbaru Niang",
       namaSuku: "Suku Manggarai",
       asalDaerah: "Wae Rebo, Flores, NTT",
-      fotoRumah: "assets/rumah_suku/rs_14_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_14_suku.svg",
+      fotoRumah: "assets/rumah_suku/rs_14_rumah.jpg",
+      fotoSuku: "assets/rumah_suku/rs_14_suku.jpg",
       deskripsi: "Rumah adat kerucut bertingkat lima yang sangat langka di desa Wae Rebo di atas awan pegunungan Flores.",
-      soundQuestion: "Lihat foto rumah adat kerucut Mbaru Niang di Wae Rebo. Manakah foto pakaian adat suku Manggarai?"
+      soundQuestion: "Lihat foto asli rumah adat kerucut Mbaru Niang di Wae Rebo. Manakah foto tarian dan pakaian adat suku Manggarai?"
     },
     {
       id: "rs_15",
-      namaRumah: "Rumah Nuwou Sesat",
-      namaSuku: "Suku Lampung",
-      asalDaerah: "Provinsi Lampung",
-      fotoRumah: "assets/rumah_suku/rs_15_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_15_suku.svg",
-      deskripsi: "Rumah panggung musyawarah adat Lampung dengan mahkota siger emas bertingkat sembilan yang sangat tersohor.",
-      soundQuestion: "Lihat foto rumah Nuwou Sesat. Manakah foto pakaian adat Lampung dengan mahkota emas Siger?"
+      namaRumah: "Rumah Limas Palembang",
+      namaSuku: "Suku Palembang",
+      asalDaerah: "Sumatera Selatan",
+      fotoRumah: "assets/rumah_suku/rs_15_rumah.jpg",
+      fotoSuku: "assets/rumah_suku/rs_15_suku.jpg",
+      deskripsi: "Rumah kayu berlantai bertingkat (kekijing) yang sangat megah dan diabadikan pada pecahan uang kertas rupiah.",
+      soundQuestion: "Lihat foto asli Rumah Limas bertingkat ini. Manakah foto busana adat Aesan Gede khas Palembang?"
     },
     {
       id: "rs_16",
-      namaRumah: "Rumah Walewangko",
-      namaSuku: "Suku Minahasa",
-      asalDaerah: "Sulawesi Utara",
-      fotoRumah: "assets/rumah_suku/rs_16_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_16_suku.svg",
-      deskripsi: "Rumah panggung kayu dengan dua tangga depan kembar yang kokoh dan tahan gempa.",
-      soundQuestion: "Lihat foto Rumah Walewangko bertangga kembar. Manakah foto asli busana adat suku Minahasa?"
-    },
-    {
-      id: "rs_17",
-      namaRumah: "Rumah Limas",
-      namaSuku: "Suku Palembang",
-      asalDaerah: "Sumatera Selatan",
-      fotoRumah: "assets/rumah_suku/rs_17_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_17_suku.svg",
-      deskripsi: "Rumah kayu berlantai bertingkat (kekijing) yang pernah diabadikan pada pecahan uang kertas sepuluh ribu rupiah.",
-      soundQuestion: "Lihat foto Rumah Limas bertingkat ini. Manakah foto busana adat Aesan Gede khas Palembang?"
-    },
-    {
-      id: "rs_18",
-      namaRumah: "Rumah Omo Sebua",
+      namaRumah: "Rumah Omo Sebua Nias",
       namaSuku: "Suku Nias",
       asalDaerah: "Pulau Nias, Sumatera Utara",
-      fotoRumah: "assets/rumah_suku/rs_18_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_18_suku.svg",
-      deskripsi: "Rumah panggung raksasa bertiang kayu diagonal yang tahan gempa dan terkenal dengan tradisi lompat batu Fahombo.",
-      soundQuestion: "Lihat foto Rumah Omo Sebua di Nias. Manakah foto asli busana adat ksatria suku Nias?"
-    },
-    {
-      id: "rs_19",
-      namaRumah: "Rumah Selaso Jatuh Kembar",
-      namaSuku: "Suku Melayu Riau",
-      asalDaerah: "Provinsi Riau",
-      fotoRumah: "assets/rumah_suku/rs_19_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_19_suku.svg",
-      deskripsi: "Balai adat Melayu bertangga tinggi dengan ukiran kayu lebah bergayut dan selembayung di ujung atapnya.",
-      soundQuestion: "Lihat foto balai adat Selaso Jatuh Kembar. Manakah foto asli pakaian teluk belanga Melayu Riau?"
-    },
-    {
-      id: "rs_20",
-      namaRumah: "Rumah Lamin Dayak Kenyah",
-      namaSuku: "Suku Dayak Kenyah",
-      asalDaerah: "Kalimantan Timur",
-      fotoRumah: "assets/rumah_suku/rs_20_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_20_suku.jpg",
-      deskripsi: "Rumah panggung raksasa sepanjang 300 meter yang dihiasi ukiran naga dan totem kayu pelindung desa.",
-      soundQuestion: "Lihat foto Rumah Lamin berukiran naga ini. Manakah foto asli busana adat suku Dayak?"
-    },
-    {
-      id: "rs_21",
-      namaRumah: "Rumah Dulohupa",
-      namaSuku: "Suku Gorontalo",
-      asalDaerah: "Provinsi Gorontalo",
-      fotoRumah: "assets/rumah_suku/rs_21_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_21_suku.svg",
-      deskripsi: "Rumah adat persidangan kerajaan Gorontalo beratap pelana dengan pilar-pilar kayu yang megah.",
-      soundQuestion: "Lihat foto rumah adat Dulohupa. Manakah foto busana adat pengantin Biliu dari Gorontalo?"
-    },
-    {
-      id: "rs_22",
-      namaRumah: "Rumah Boyang",
-      namaSuku: "Suku Mandar",
-      asalDaerah: "Sulawesi Barat",
-      fotoRumah: "assets/rumah_suku/rs_22_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_22_suku.svg",
-      deskripsi: "Rumah panggung khas masyarakat Mandar yang terkenal dengan perahu sandeq layar tercepat di dunia.",
-      soundQuestion: "Lihat foto Rumah Boyang Mandar. Manakah foto asli pakaian adat tenun sutra Mandar?"
-    },
-    {
-      id: "rs_23",
-      namaRumah: "Rumah Sulah Nyanda",
-      namaSuku: "Suku Baduy",
-      asalDaerah: "Pegunungan Kendeng, Banten",
-      fotoRumah: "assets/rumah_suku/rs_23_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_23_suku.svg",
-      deskripsi: "Rumah panggung bambu alami yang dibangun selaras dengan alam pegunungan tanpa merusak kontur tanah.",
-      soundQuestion: "Lihat foto rumah Sulah Nyanda di tanah Baduy. Manakah foto asli busana tenun sederhana suku Baduy?"
-    },
-    {
-      id: "rs_24",
-      namaRumah: "Rumah Uma Lengge",
-      namaSuku: "Suku Bima",
-      asalDaerah: "Kabupaten Bima, NTB",
-      fotoRumah: "assets/rumah_suku/rs_24_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_24_suku.svg",
-      deskripsi: "Bangunan lumbung padi dan tempat tinggal tradisional berbentuk kerucut tirus dari kayu dan jerami.",
-      soundQuestion: "Lihat foto Uma Lengge berbentuk kerucut unik ini. Manakah foto busana adat Rimpu suku Bima?"
-    },
-    {
-      id: "rs_25",
-      namaRumah: "Rumah Rakit",
-      namaSuku: "Suku Bangka",
-      asalDaerah: "Kepulauan Bangka Belitung",
-      fotoRumah: "assets/rumah_suku/rs_25_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_25_suku.svg",
-      deskripsi: "Rumah terapung di atas balok bambu besar di tepi sungai dan pesisir laut Bangka Belitung.",
-      soundQuestion: "Lihat foto Rumah Rakit terapung. Manakah foto pakaian adat Paksian bermahkota kembang goyang?"
-    },
-    {
-      id: "rs_26",
-      namaRumah: "Rumah Tanean Lanjhan",
-      namaSuku: "Suku Madura",
-      asalDaerah: "Pulau Madura, Jawa Timur",
-      fotoRumah: "assets/rumah_suku/rs_26_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_26_suku.svg",
-      deskripsi: "Deretan rumah keluarga yang memanjang menghadap satu halaman bersama lambang kerukunan persaudaraan.",
-      soundQuestion: "Lihat foto tatanan rumah Tanean Lanjhan. Manakah foto baju garis merah-putih Pesa'an khas Madura?"
-    },
-    {
-      id: "rs_27",
-      namaRumah: "Rumah Panggung Asmat",
-      namaSuku: "Suku Asmat",
-      asalDaerah: "Pesisir Papua Selatan",
-      fotoRumah: "assets/rumah_suku/rs_27_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_27_suku.svg",
-      deskripsi: "Rumah Jew bertiang kayu bakau tinggi tempat para pemahat kayu Asmat berkumpul menciptakan ukiran magis.",
-      soundQuestion: "Lihat foto rumah Jew suku Asmat di pesisir rawa. Manakah foto asli para pemahat ksatria Asmat?"
-    },
-    {
-      id: "rs_28",
-      namaRumah: "Rumah Bale Gede",
-      namaSuku: "Suku Bali",
-      asalDaerah: "Kabupaten Karangasem, Bali",
-      fotoRumah: "assets/rumah_suku/rs_28_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_28_suku.svg",
-      deskripsi: "Paviliun bertiang dua belas tempat upacara adat keluarga Bali dengan ukiran prada warna keemasan.",
-      soundQuestion: "Lihat foto Bale Gede dengan tiang ukir Bali. Manakah foto penari tradisional Bali berbusana legong?"
-    },
-    {
-      id: "rs_29",
-      namaRumah: "Rumah Panggung Sentani",
-      namaSuku: "Suku Sentani",
-      asalDaerah: "Danau Sentani, Papua",
-      fotoRumah: "assets/rumah_suku/rs_29_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_29_suku.svg",
-      deskripsi: "Rumah panggung kayu di atas air jernih danau yang dinaungi pemandangan bukit-bukit hijau.",
-      soundQuestion: "Lihat foto rumah panggung di atas air Danau Sentani. Manakah foto busana adat masyarakat suku Sentani?"
-    },
-    {
-      id: "rs_30",
-      namaRumah: "Rumah Tambi",
-      namaSuku: "Suku Lore",
-      asalDaerah: "Sulawesi Tengah",
-      fotoRumah: "assets/rumah_suku/rs_30_rumah.svg",
-      fotoSuku: "assets/rumah_suku/rs_30_suku.svg",
-      deskripsi: "Rumah panggung berbentuk prisma segitiga yang atap ijuknya menjulur hampir menyentuh tanah.",
-      soundQuestion: "Lihat foto Rumah Tambi berbentuk segitiga unik ini. Manakah foto pakaian adat tradisional suku di Sulawesi Tengah?"
+      fotoRumah: "assets/rumah_suku/rs_16_rumah.jpg",
+      fotoSuku: "assets/rumah_suku/rs_16_suku.jpg",
+      deskripsi: "Rumah panggung raksasa bertiang kayu diagonal yang tahan gempa dan terkenal dengan tradisi ksatria lompat batu Fahombo.",
+      soundQuestion: "Lihat foto asli Rumah Omo Sebua di Nias. Manakah foto asli busana adat dan tradisi ksatria suku Nias?"
     }
   ],
 

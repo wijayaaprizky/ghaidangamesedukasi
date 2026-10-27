@@ -10,7 +10,7 @@ class SoundEngine {
     this.bgmInterval = null;
     this.isMuted = false;
     this.voice = null;
-    this.useCloudVoice = true; // Mode suara studio jernih (Google Neural TTS)
+    this.useCloudVoice = false; // Gunakan Suara Web Speech Asli Bawaan (Jernih & Alami seperti saat offline)
     this.audioPlayer = null;
     this.numberNames = [
       "Nol", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh",
@@ -36,10 +36,12 @@ class SoundEngine {
     const unlock = () => {
       this.initAudioContext();
       if ('speechSynthesis' in window) {
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+        }
         this.findBestIndonesianVoice();
       }
       if (this.audioPlayer) {
-        // Unlock HTML5 Audio on mobile
         this.audioPlayer.load();
       }
     };
@@ -68,9 +70,18 @@ class SoundEngine {
     if (window.speechSynthesis.onvoiceschanged !== undefined) {
       window.speechSynthesis.onvoiceschanged = loadVoices;
     }
+    // Pengecekan berulang awal untuk browser HP (Android/iOS)
+    let checks = 0;
+    const voiceInterval = setInterval(() => {
+      loadVoices();
+      checks++;
+      if (this.voice || checks >= 6) {
+        clearInterval(voiceInterval);
+      }
+    }, 500);
   }
 
-  // Pencarian Pintar Suara Bahasa Indonesia Alami
+  // Pencarian Pintar Suara Bahasa Indonesia Alami (Persis seperti versi offline yang jernih)
   findBestIndonesianVoice() {
     if (!('speechSynthesis' in window)) return null;
     const voices = window.speechSynthesis.getVoices();
@@ -84,9 +95,9 @@ class SoundEngine {
     });
 
     if (idVoices.length > 0) {
-      // Prioritaskan suara natural / wanita ramah anak
+      // Prioritaskan suara natural / studio / wanita ramah anak: Gadis, Google, Damayanti, Ardi, Natural
       const naturalVoice = idVoices.find(v => 
-        /natural|online|google|gadis|damayanti/i.test(v.name)
+        /gadis|damayanti|natural|online|google|indonesia/i.test(v.name)
       );
       this.voice = naturalVoice || idVoices[0];
       return this.voice;
@@ -120,9 +131,9 @@ class SoundEngine {
   }
 
   /**
-   * Sistem Narasi Audio Ganda (Dual-Engine Audio):
-   * 1. Utama: Google Cloud Studio TTS (Suara asli manusia Bahasa Indonesia, 100% jernih di semua HP/tablet/laptop).
-   * 2. Cadangan Otomatis: Web Speech API (speechSynthesis) jika offline.
+   * Sistem Narasi Audio Jernih & Alami:
+   * Menggunakan Web Speech API asli bawaan perangkat (Edge/Chrome/Android/iOS)
+   * dengan tuning suara manusia Indonesia natural, rate 0.88 agar jelas untuk anak TK-A.
    */
   speak(text, onEnd) {
     if (this.isMuted) return;
@@ -131,17 +142,16 @@ class SoundEngine {
     const clean = this.cleanSpeechText(text);
     if (!clean) return;
 
-    // Coba Engine 1: Suara Studio Jernih Alami (Online)
-    if (this.useCloudVoice && navigator.onLine) {
-      const playSuccess = this.speakCloudTTS(clean, onEnd, () => {
-        // Fallback otomatis ke Engine 2 jika ada kendala jaringan
-        this.speakWebSpeech(clean, onEnd);
-      });
-      if (playSuccess) return;
+    // Engine Utama: Web Speech API Alami Bawaan Perangkat (Sama persis dengan saat offline)
+    if ('speechSynthesis' in window) {
+      this.speakWebSpeech(clean, onEnd);
+      return;
     }
 
-    // Engine 2: Fallback Web Speech API bawaan perangkat
-    this.speakWebSpeech(clean, onEnd);
+    // Fallback Darurat: Cloud TTS jika perangkat sama sekali tidak mendukung SpeechSynthesis
+    if (this.useCloudVoice && navigator.onLine) {
+      this.speakCloudTTS(clean, onEnd);
+    }
   }
 
   // Engine 1: Streaming Suara Studio Indonesia Asli (Google Natural Voice)
@@ -201,8 +211,8 @@ class SoundEngine {
         utter.voice = bestVoice;
       }
       utter.lang = 'id-ID';
-      utter.rate = 0.90;
-      utter.pitch = 1.0;
+      utter.rate = 0.88; // Artikulasi tenang, empuk, dan jelas untuk anak TK-A
+      utter.pitch = 1.0; // Nada alami manusia (bukan robot kaku, bukan chipmunk)
 
       this.currentUtterance = utter;
 

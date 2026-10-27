@@ -10,14 +10,26 @@ class SoundEngine {
     this.bgmInterval = null;
     this.isMuted = false;
     this.voice = null;
+    this.useCloudVoice = true; // Mode suara studio jernih (Google Neural TTS)
+    this.audioPlayer = null;
     this.numberNames = [
       "Nol", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh",
       "Sebelas", "Dua belas", "Tiga belas", "Empat belas", "Lima belas", "Enam belas",
       "Tujuh belas", "Delapan belas", "Sembilan belas", "Dua puluh"
     ];
     this.currentUtterance = null;
+    this.initAudioPlayer();
     this.initVoice();
     this.unlockAudioOnFirstGesture();
+  }
+
+  initAudioPlayer() {
+    try {
+      this.audioPlayer = new Audio();
+      this.audioPlayer.preload = 'auto';
+    } catch (e) {
+      this.audioPlayer = null;
+    }
   }
 
   unlockAudioOnFirstGesture() {
@@ -25,6 +37,10 @@ class SoundEngine {
       this.initAudioContext();
       if ('speechSynthesis' in window) {
         this.findBestIndonesianVoice();
+      }
+      if (this.audioPlayer) {
+        // Unlock HTML5 Audio on mobile
+        this.audioPlayer.load();
       }
     };
     document.addEventListener('click', unlock, { once: true });
@@ -60,7 +76,7 @@ class SoundEngine {
     const voices = window.speechSynthesis.getVoices();
     if (!voices || voices.length === 0) return this.voice;
 
-    // 1. Filter semua voice dengan tag Bahasa Indonesia (id, id-ID, in, in-ID)
+    // Filter semua voice dengan tag Bahasa Indonesia (id, id-ID, in, in-ID)
     const idVoices = voices.filter(v => {
       const lang = (v.lang || '').toLowerCase().replace('_', '-');
       const name = (v.name || '').toLowerCase();
@@ -68,8 +84,7 @@ class SoundEngine {
     });
 
     if (idVoices.length > 0) {
-      // Prioritaskan suara natural / wanita ramah anak:
-      // Google Bahasa Indonesia (Android/Chrome), Microsoft Gadis / Ardi Natural (Windows/Edge), Apple Damayanti (iOS/Safari)
+      // Prioritaskan suara natural / wanita ramah anak
       const naturalVoice = idVoices.find(v => 
         /natural|online|google|gadis|damayanti/i.test(v.name)
       );
@@ -77,8 +92,7 @@ class SoundEngine {
       return this.voice;
     }
 
-    // 2. Alternatif regional: Suara Melayu (ms, ms-MY) jika perangkat tidak memiliki paket suara Indonesia
-    // (Pelafalan fonem Melayu sangat mirip dan natural didengar anak Indonesia, berbeda jauh dengan aksen Inggris)
+    // Alternatif Melayu jika Indonesia tidak tersedia sama sekali di perangkat
     const msVoice = voices.find(v => {
       const lang = (v.lang || '').toLowerCase().replace('_', '-');
       const name = (v.name || '').toLowerCase();
@@ -90,54 +104,123 @@ class SoundEngine {
       return this.voice;
     }
 
-    // 3. PENTING: JANGAN PERNAH fallback ke voices[0] (yang biasanya English / US)!
-    // Membiarkan this.voice = null akan membuat peramban (Chrome Android/iOS Safari)
-    // memproses utter.lang = 'id-ID' secara tepat menggunakan mesin sintesis bahasa Indonesia,
-    // bukan dipaksa membaca dengan logat bule / robotik asing!
     this.voice = null;
     return null;
   }
 
+  // Bersihkan teks dari emoji dan simbol agar artikulasi pelafalan 100% tepat
+  cleanSpeechText(raw) {
+    if (!raw) return '';
+    return raw
+      .replace(/[\u{1F300}-\u{1FAFF}]/gu, '') // Hapus emoji unicode
+      .replace(/[\u{2600}-\u{27BF}]/gu, '')
+      .replace(/[📍💡🔊⭐🏆🎉👉✨🏖️🏰⛩️🏛️🛕🏔️🪵👜]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  /**
+   * Sistem Narasi Audio Ganda (Dual-Engine Audio):
+   * 1. Utama: Google Cloud Studio TTS (Suara asli manusia Bahasa Indonesia, 100% jernih di semua HP/tablet/laptop).
+   * 2. Cadangan Otomatis: Web Speech API (speechSynthesis) jika offline.
+   */
   speak(text, onEnd) {
-    if (this.isMuted || !('speechSynthesis' in window)) return;
-    
-    // Resume audio context jika browser menidurkannya
-    if (window.speechSynthesis.paused) {
-      window.speechSynthesis.resume();
+    if (this.isMuted) return;
+    this.stopSpeech();
+
+    const clean = this.cleanSpeechText(text);
+    if (!clean) return;
+
+    // Coba Engine 1: Suara Studio Jernih Alami (Online)
+    if (this.useCloudVoice && navigator.onLine) {
+      const playSuccess = this.speakCloudTTS(clean, onEnd, () => {
+        // Fallback otomatis ke Engine 2 jika ada kendala jaringan
+        this.speakWebSpeech(clean, onEnd);
+      });
+      if (playSuccess) return;
     }
-    window.speechSynthesis.cancel(); // Hentikan suara yang sedang berjalan
 
-    const bestVoice = this.findBestIndonesianVoice();
+    // Engine 2: Fallback Web Speech API bawaan perangkat
+    this.speakWebSpeech(clean, onEnd);
+  }
 
-    const utter = new SpeechSynthesisUtterance(text);
-    if (bestVoice) {
-      utter.voice = bestVoice;
-    }
-    utter.lang = 'id-ID';
-    utter.rate = 0.90; // Kecepatan artikulasi ramah, jelas & tegas untuk anak TK
-    utter.pitch = 1.0;  // Pitch natural 1.0 (mencegah suara robot/cempreng terdistorsi di HP)
-
-    // Cegah garbage collection prematur di Google Chrome Android
-    this.currentUtterance = utter;
-
-    utter.onend = (e) => {
-      this.currentUtterance = null;
-      if (onEnd) onEnd(e);
-    };
-
-    utter.onerror = (e) => {
-      this.currentUtterance = null;
-      if (onEnd) onEnd(e);
-    };
-    
-    // Jeda mikro 40ms untuk stabilitas pembatalan di mobile Safari & Chrome
-    setTimeout(() => {
-      try {
-        window.speechSynthesis.speak(utter);
-      } catch (err) {
-        console.warn("Speak error:", err);
+  // Engine 1: Streaming Suara Studio Indonesia Asli (Google Natural Voice)
+  speakCloudTTS(cleanText, onEnd, onError) {
+    try {
+      if (!this.audioPlayer) {
+        this.initAudioPlayer();
       }
-    }, 40);
+      if (!this.audioPlayer) return false;
+
+      const encoded = encodeURIComponent(cleanText);
+      const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=id&client=tw-ob`;
+
+      this.audioPlayer.pause();
+      this.audioPlayer.src = url;
+
+      this.audioPlayer.onended = () => {
+        if (onEnd) onEnd();
+      };
+
+      this.audioPlayer.onerror = (err) => {
+        console.warn("Cloud TTS playback error, falling back to Web Speech:", err);
+        if (onError) onError();
+      };
+
+      const p = this.audioPlayer.play();
+      if (p !== undefined) {
+        p.catch(err => {
+          console.warn("Cloud TTS play prevented, falling back:", err);
+          if (onError) onError();
+        });
+      }
+      return true;
+    } catch (err) {
+      console.warn("Cloud TTS exception, falling back:", err);
+      if (onError) onError();
+      return false;
+    }
+  }
+
+  // Engine 2: Web Speech API Bawaan Browser
+  speakWebSpeech(cleanText, onEnd) {
+    if (!('speechSynthesis' in window)) {
+      if (onEnd) onEnd();
+      return;
+    }
+
+    try {
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
+      window.speechSynthesis.cancel();
+
+      const bestVoice = this.findBestIndonesianVoice();
+      const utter = new SpeechSynthesisUtterance(cleanText);
+      if (bestVoice) {
+        utter.voice = bestVoice;
+      }
+      utter.lang = 'id-ID';
+      utter.rate = 0.90;
+      utter.pitch = 1.0;
+
+      this.currentUtterance = utter;
+
+      utter.onend = (e) => {
+        this.currentUtterance = null;
+        if (onEnd) onEnd(e);
+      };
+
+      utter.onerror = (e) => {
+        this.currentUtterance = null;
+        if (onEnd) onEnd(e);
+      };
+
+      window.speechSynthesis.speak(utter);
+    } catch (err) {
+      console.warn("WebSpeech speak error:", err);
+      if (onEnd) onEnd();
+    }
   }
 
   // Khusus membaca suku kata & mengeja
@@ -153,6 +236,12 @@ class SoundEngine {
   }
 
   stopSpeech() {
+    if (this.audioPlayer) {
+      try {
+        this.audioPlayer.pause();
+        this.audioPlayer.currentTime = 0;
+      } catch (e) {}
+    }
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }

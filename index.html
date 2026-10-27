@@ -378,10 +378,13 @@
           <li><strong>Literasi Awal / Membaca (30 Soal):</strong> Pengenalan 30 kata suku kata (K-V-K-V) dengan visual ceria dan pelafalan fonik bersuara.</li>
           <li><strong>Numerasi Awal / Berhitung (30 Soal):</strong> Menghitung hingga belasan (1-20) secara interaktif sentuh serta penjumlahan visual ceria.</li>
         </ul>
-        <p><strong>💡 Suara Audio:</strong> Game ini dilengkapi Suara Studio Bahasa Indonesia jernih. Anak dapat menekan tombol 🔊 kapan saja untuk mendengar kembali instruksi dan ejaan kata.</p>
-        <div style="margin-top: 10px; text-align: center;">
-          <button type="button" class="btn-secondary" style="padding: 10px 18px; font-size: 0.95rem;" onclick="soundEngine.speak('Halo teman-teman! Selamat datang di Game Petualangan Ceria TK-A!')">
-            🔊 Uji Suara Studio Bahasa Indonesia
+        <p><strong>💡 Suara Audio:</strong> Game ini dilengkapi Suara Fasih Bahasa Indonesia yang diartikulasikan jelas dan ramah anak. Tekan tombol di bawah untuk menguji atau beralih mode suara.</p>
+        <div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+          <button type="button" class="btn-secondary" style="padding: 10px 16px; font-size: 0.95rem;" onclick="soundEngine.speak('Halo teman-teman! Selamat datang di Game Petualangan Ceria TK-A!')">
+            🔊 Uji Suara Fasih Indonesia
+          </button>
+          <button type="button" class="btn-secondary" style="padding: 10px 16px; font-size: 0.95rem; background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D;" onclick="const m = soundEngine.toggleVoiceMode(); this.textContent = (m === 'cloud' ? '🎙️ Mode: Studio Fasih' : '🎙️ Mode: Bawaan HP');">
+            🎙️ Ganti Mode Suara
           </button>
         </div>
       </div>
